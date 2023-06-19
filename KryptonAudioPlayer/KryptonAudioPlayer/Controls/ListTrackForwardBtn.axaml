@@ -1,0 +1,26 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:KryptonAudioPlayer.Controls">
+  <Design.PreviewWith>
+	  <controls:ListTrackForwardBtn/>
+  </Design.PreviewWith>
+
+  <Style Selector="controls|ListTrackForwardBtn">
+    <!-- Set Defaults -->
+    <Setter Property="Template">
+      <ControlTemplate>
+		  <Button Background="Transparent" Command="{TemplateBinding Command}">
+			  <Button.Styles>
+				  <Style Selector="Button:pointerover /template/ ContentPresenter">
+					  <Setter Property="Background" Value="Transparent"></Setter>
+				  </Style>
+				  <Style Selector="Button:pressed /template/ ContentPresenter">
+					  <Setter Property="Background" Value="Transparent"/>
+				  </Style>
+			  </Button.Styles>
+			  <Image Source="/Assets/Forward.png" Width="53" Height="50"/>
+		  </Button>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+</Styles>

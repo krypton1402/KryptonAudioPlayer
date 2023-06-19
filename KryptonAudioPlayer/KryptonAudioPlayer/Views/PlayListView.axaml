@@ -1,0 +1,132 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:conv="clr-namespace:KryptonAudioPlayer.Converters"
+             mc:Ignorable="d" d:DesignWidth="641" d:DesignHeight="570"
+			 CornerRadius="13"
+			 Width="641" Height="570"
+		     xmlns:viewModels="clr-namespace:KryptonAudioPlayer.ViewModels"
+		     x:CompileBindings="True"
+			 x:DataType="viewModels:PlayListViewModel"
+			 x:Class="KryptonAudioPlayer.Views.PlayListView">
+<UserControl.Resources>
+	<conv:BoxShadowConverter x:Key="BoxShadowConverter"/>
+</UserControl.Resources>
+	<DockPanel>
+		<Grid RowDefinitions="auto,auto" >
+		<Button Grid.Row="0"
+			    DockPanel.Dock="Right" Command="{Binding AddTracksCommand}"
+				CornerRadius="50"
+				Margin="5"
+				HorizontalAlignment="Right"
+				VerticalAlignment="Top" Content="Добавить треки"
+				BorderBrush="Black"
+				BorderThickness="1">
+			<Button.Background>
+				<LinearGradientBrush StartPoint="50%,50%" EndPoint="50%,50%">
+					<LinearGradientBrush.GradientStops>
+						<GradientStop Offset="0" Color="#8BF1FF"/>
+						<GradientStop Offset="1" Color="#0000ffff"/>
+					</LinearGradientBrush.GradientStops>
+				</LinearGradientBrush>
+			</Button.Background>
+		</Button>
+<TextBlock Grid.Row="0" Foreground="#4D4D4D" FontWeight="Light" Text="Плейлист" FontFamily="Muller" FontSize="52" HorizontalAlignment="Left" Margin="5,5,5,5"/>
+		<ListBox Name="PlayList"	
+				 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+				 VirtualizationMode="None"
+				 Width="641"
+				Padding="0,15,0,0"
+				 Grid.Row="1"
+				 CornerRadius="13"
+				  DockPanel.Dock="Left"
+				  SelectedIndex="{Binding SelectedTrack}"
+				  HorizontalAlignment="Left" Items="{Binding Playlist}"
+				 ClipToBounds="False">
+			
+			<ListBox.ItemTemplate>
+				
+				<DataTemplate>
+							<Border Background="#FFFFFF"
+										CornerRadius="9" Width="610"
+										Height="57"
+									    BorderThickness="0"
+									    Padding="0,0,0,0"
+									    VerticalAlignment="Center">
+								<Border.Styles>
+									<Style Selector="Border">
+										<Setter Property="BoxShadow" Value="0 4 4 0 #3F000000"/>
+										<Setter Property="Transitions">
+											<Transitions>
+										    <BoxShadowsTransition Property="BoxShadow" Duration="0:0:0.2"/>
+											</Transitions>
+										</Setter>
+									</Style>
+									<Style Selector="Border:pointerover">
+										<Setter Property="BoxShadow" Value="0 5 5 0 #FF80EB"/>
+									</Style>
+								</Border.Styles>
+								<StackPanel VerticalAlignment="Center">
+									<Grid ColumnDefinitions="auto,auto,*">
+										<Border VerticalAlignment="Center"
+												Width="50" Height="50"
+											    Background="White"
+											    CornerRadius="9"
+												Grid.Column="0"
+												ClipToBounds="False"
+												Margin="4,4,4,4"
+												BoxShadow="0 4 22 0 #000000">
+											<Border HorizontalAlignment="Center"
+	                                                Width="50" Height="50"
+		                                            Background="Transparent"
+		                                            CornerRadius="9"
+		                                            Grid.Row="0"
+		                                            ClipToBounds="True">
+
+												<Image Stretch="UniformToFill" VerticalAlignment="Center" Source="{Binding	Path=CoverImage}"/>
+											</Border>
+										</Border>
+										<StackPanel Grid.Column="1" VerticalAlignment="Center">
+								<TextBlock FontFamily="Muller" FontSize="18" Text="{Binding Path=Title}" Margin="2,2,2,2"/>
+							    <TextBlock FontFamily="Muller" FontSize="18" Text="{Binding Path=Artist}" Opacity="0.5" Margin="2,2,2,2"/>
+										</StackPanel>
+										<TextBlock Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="Muller" FontSize="18" Opacity="0.5" Text="{Binding Path=Duration}" Margin="5,5,5,5"/>
+									</Grid>
+								</StackPanel>
+							</Border>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+			<ListBox.Background>
+				<LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,100%">
+					<LinearGradientBrush.GradientStops>
+						<GradientStop Offset="0" Color="#DDDDDD"/>
+						<GradientStop Offset="1" Color="#0000ffff"/>
+					</LinearGradientBrush.GradientStops>
+				</LinearGradientBrush>
+			</ListBox.Background>
+			
+			<ListBox.Styles>
+				<Style Selector="ScrollViewer">
+					<Setter Property="Offset" Value="550 550"/>
+					<Setter Property="Height" Value="505"/>
+					
+				</Style>
+				<Style Selector="ListBoxItem">
+					<Setter Property="Background" Value="Transparent"/>
+					<Setter Property="Height" Value="60"/>
+					<Setter Property="Width" Value="610"/>
+					<Setter Property="Margin" Value="2,2,2,2"/>
+					<Setter Property="CornerRadius" Value="9"/>
+					<Setter Property="ClipToBounds" Value="False"/>
+					
+				</Style>
+				<Style Selector="ListBoxItem:pointerover">
+					<Setter Property="Background" Value="Transparent"/>
+					
+				</Style>
+			</ListBox.Styles>
+		</ListBox>
+		</Grid>
+	</DockPanel>
+</UserControl>

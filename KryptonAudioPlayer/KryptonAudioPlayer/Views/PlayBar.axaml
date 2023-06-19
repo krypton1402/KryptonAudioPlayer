@@ -1,0 +1,46 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:Controls="clr-namespace:KryptonAudioPlayer.Controls"
+             mc:Ignorable="d" d:DesignWidth="891" d:DesignHeight="166"
+			 xmlns:viewModels="clr-namespace:KryptonAudioPlayer.ViewModels"
+		     x:CompileBindings="True"
+			 x:DataType="viewModels:PlayListViewModel"
+             x:Class="KryptonAudioPlayer.Views.PlayBar">
+	
+	<UserControl.Styles>
+		<Styles>
+			<StyleInclude Source = "avares://KryptonAudioPlayer/Controls/ListTrackBackBtn.axaml"/>
+			<StyleInclude Source = "avares://KryptonAudioPlayer/Controls/ListTrackForwardBtn.axaml"/>
+			<StyleInclude Source = "avares://KryptonAudioPlayer/Controls/PlayBtn.axaml"/>
+		</Styles>
+	</UserControl.Styles>
+	
+	<Border Width="891" Height="166" CornerRadius="51" BoxShadow="0 1 23 0 #000000" Margin="50">
+		<Border.Background>
+			<LinearGradientBrush StartPoint="100%,0%" EndPoint="100%,100%">
+				<LinearGradientBrush.GradientStops>
+					<GradientStop Offset="0" Color="#79FFDF"/>
+					<GradientStop Offset="1" Color="#0000ffff"/>
+				</LinearGradientBrush.GradientStops>
+			</LinearGradientBrush>
+		</Border.Background>
+		<Grid RowDefinitions="*,*,auto">
+			<StackPanel>
+			<TextBlock FontFamily="Muller" FontSize="24" Margin="4,4,4,4" Text="{Binding CurrentTrackTitle}" HorizontalAlignment="Center"/>
+			<TextBlock FontFamily="Muller" Opacity="0.69" FontSize="24" Margin="4,4,4,4" Text="{Binding CurrentTrackArtist}" HorizontalAlignment="Center"/>
+			</StackPanel>
+			<Border Grid.Row="1" Width="714" Height="3" Background="White" CornerRadius="109"/>
+			<StackPanel Grid.Row="3" Orientation="Horizontal"
+						HorizontalAlignment="Center"
+						VerticalAlignment="Bottom"
+						Margin="2,2,2,15">
+				<Controls:ListTrackBackBtn Command="{Binding PrevTrackCommand}"/>
+				<Controls:PlayStopBtn/>
+				<Controls:ListTrackForwardBtn Command="{Binding NextTrackCommand}"/>
+			</StackPanel>
+		</Grid>
+	</Border>
+	
+</UserControl>

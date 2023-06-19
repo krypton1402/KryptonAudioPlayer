@@ -1,0 +1,82 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:KryptonAudioPlayer.ViewModels"
+        xmlns:custom="clr-namespace:KryptonAudioPlayer.Views"
+		xmlns:Controls="clr-namespace:KryptonAudioPlayer.Controls"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="844"
+		Width="1280" Height="844"
+		x:Class="KryptonAudioPlayer.Views.MainWindow"
+        
+        Icon="/Assets/avalonia-logo.ico"
+        Title="KryptonAudioPlayer"
+    TransparencyLevelHint="AcrylicBlur"
+        Background="Transparent"
+    ExtendClientAreaToDecorationsHint="False"
+		>
+<Window.Styles>
+		<StyleInclude Source = "avares://KryptonAudioPlayer/Controls/ListTrackBackBtn.axaml"/>
+	    <StyleInclude Source = "avares://KryptonAudioPlayer/Controls/ListTrackForwardBtn.axaml"/>
+	    <StyleInclude Source = "avares://KryptonAudioPlayer/Controls/PlaylistBtn.axaml"/>
+	</Window.Styles>
+	<Design.DataContext>
+		<vm:MainWindowViewModel/>
+	</Design.DataContext>
+
+	<Grid RowDefinitions="Auto,auto,auto"  Classes="MainContainer" >
+		<Grid.Background>
+		<LinearGradientBrush StartPoint="0%,100%" EndPoint="75%,0%">
+			<LinearGradientBrush.GradientStops>
+				<GradientStop Offset="0" Color="#C1C350"/>
+				<GradientStop Offset="1" Color="#8BF1FF"/>
+			</LinearGradientBrush.GradientStops>
+		</LinearGradientBrush>
+		</Grid.Background>
+		<Grid ColumnDefinitions="*,*">
+		<Controls:PlaylistBtn Command="{Binding ShowList}" Name="Playlist"  Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="15,15,15,15"/>
+			<Grid Grid.Row="1" RowDefinitions="*,*">
+				<Border VerticalAlignment="Top"
+		HorizontalAlignment="Center"
+		Width="350" Height="350"
+		Background="Transparent"
+		CornerRadius="15"
+		Grid.Row="0"
+		ClipToBounds="False"
+		Margin="0,62,0,0"
+		BoxShadow="0 4 22 0 #000000">
+					<Grid>
+					<TextBlock Text="Добавьте треки в плейлист"
+							   HorizontalAlignment="Center"
+							   VerticalAlignment="Center"
+							   Foreground="#4D4D4D"
+							   FontWeight="Light"
+							   FontSize="25"
+							   FontFamily="Muller"/>
+					<Border HorizontalAlignment="Center"
+		Width="350" Height="350"
+		Background="Transparent"
+		CornerRadius="15"
+		Grid.Row="0"
+		ClipToBounds="True"
+		>
+					<Image Stretch="UniformToFill" DataContext="{Binding PL}" Source="{Binding CurrentTrackCover}"/>
+				    </Border>
+					</Grid>
+				</Border>
+			<StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+				<TextBlock FontFamily="Muller" FontSize="35" Margin="4,4,4,4" DataContext="{Binding PL}" Text="{Binding CurrentTrackTitle}" HorizontalAlignment="Center"/>
+				<TextBlock FontFamily="Muller" Opacity="0.69" FontSize="35" Margin="4,4,4,4" DataContext="{Binding	PL}" Text="{Binding CurrentTrackArtist}" HorizontalAlignment="Center"/>
+			</StackPanel>
+			</Grid>
+			<custom:PlayListView Name="Spisok" Grid.Column="1" DataContext="{Binding PL}"
+							 Opacity="{Binding OpacityPanel}"
+							 Margin="0,0,77,0"
+							 HorizontalAlignment="Right"/>
+		</Grid>
+		
+			<custom:PlayBar Grid.Row="2" Margin="0,0,0,73" DataContext="{Binding PL}" DockPanel.Dock="Bottom"/>
+			
+		
+	</Grid>
+</Window>

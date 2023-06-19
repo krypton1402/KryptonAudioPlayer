@@ -1,0 +1,24 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:viewModels="clr-namespace:KryptonAudioPlayer.ViewModels"
+             x:Class="KryptonAudioPlayer.Controls.PlayStopBtn"
+			 x:DataType="viewModels:PlayListViewModel">
+	
+	<Button Background="Transparent" Command="{Binding PlayMusicCommand}">
+		<Button.Styles>
+			<Style Selector="Button:pointerover /template/ ContentPresenter">
+				<Setter Property="Background" Value="Transparent"></Setter>
+			</Style>
+			<Style Selector="Button:pressed /template/ ContentPresenter">
+				<Setter Property="Background" Value="Transparent"/>
+			</Style>
+		</Button.Styles>
+		<Panel>
+			<Image IsVisible="{Binding !ChangeIcon}" Source="/Assets/Play.png" Width="53" Height="50"/>
+			<Image IsVisible="{Binding ChangeIcon}" Source="/Assets/Pause.png" Width="53" Height="50"/>
+		</Panel>
+	</Button>
+	
+</UserControl>

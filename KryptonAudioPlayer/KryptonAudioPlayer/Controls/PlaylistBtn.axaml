@@ -1,0 +1,26 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:KryptonAudioPlayer.Controls">
+  <Design.PreviewWith>
+    <controls:PlaylistBtn />
+  </Design.PreviewWith>
+
+  <Style Selector="controls|PlaylistBtn">
+    <!-- Set Defaults -->
+    <Setter Property="Template">
+      <ControlTemplate>
+		  <Button Background="Transparent" Command="{TemplateBinding Command}">
+			  <Button.Styles>
+				  <Style Selector="Button:pointerover /template/ ContentPresenter">
+					  <Setter Property="Background" Value="Transparent"></Setter>
+				  </Style>
+				  <Style Selector="Button:pressed /template/ ContentPresenter">
+					  <Setter Property="Background" Value="Transparent"/>
+				  </Style>
+			  </Button.Styles>
+			  <Image Source="/Assets/Playlist.png" Width="58" Height="31"/>
+		  </Button>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+</Styles>
